@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: kastro  # replace with your MySQL root password
+      MYSQL_DATABASE: cricket_db
+    volumes:
+      - db_data:/var/lib/mysql
+
+  app:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: your_password  # replace with your MySQL root password
+
+volumes:
+  db_data:

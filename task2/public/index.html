@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This is Kastro's Cricket Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Container div for adding border */
+        .page-border {
+            border: 5px solid #28a745; /* Green border */
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1000px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #333;
+        }
+
+        h1 span {
+            color: #ff5733; /* Orange color for KASTRO */
+            font-weight: bold;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        button i {
+            margin-right: 8px;
+        }
+
+        #responseMessage {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-top: 20px;
+            border: 2px solid #28a745;
+        }
+
+        .youtube-button {
+            background-color: #FF0000; /* YouTube red */
+        }
+
+        .youtube-button:hover {
+            background-color: #cc0000;
+        }
+
+        .linkedin-button {
+            background-color: #0077B5; /* LinkedIn blue */
+        }
+
+        .linkedin-button:hover {
+            background-color: #005582;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        a {
+            text-decoration: none; /* Remove underline */
+        }
+    </style>
+</head>
+<body>
+    <div class="page-border">
+        <h1>This is <span>KASTRO's</span> Cricket Application</h1>
+        <img src="https://media.licdn.com/dms/image/v2/D5603AQHJB_lF1d9OSw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718971147172?e=1732752000&v=beta&t=9eISNqNp6VJfVhKLHaOjNDHI4-bwp1uk4c2GVbaxMQc" alt="Kastro's Profile">
+        
+        <form id="cricketerForm">
+            <label for="cricketerName">Enter Cricketer Name:</label>
+            <input type="text" id="cricketerName" name="cricketerName" required>
+            
+            <label for="countryName">Enter Country Name:</label>
+            <input type="text" id="countryName" name="countryName" required>
+            
+            <button type="submit">Submit</button>
+        </form>
+        <p id="responseMessage"></p>
+
+        <div class="button-container">
+            <a href="https://youtube.com/playlist?list=PLs-PsDpuAuTeNx3OgGQ1QrpNBo-XE6VBh&si=8VPevPsXVRBFrmSU" target="_blank">
+                <button class="youtube-button"><i class="fab fa-youtube"></i> Docker - Basics to Brilliance</button>
+            </a>
+            <a href="https://www.linkedin.com/in/kastro-kiran/" target="_blank">
+                <button class="linkedin-button"><i class="fab fa-linkedin"></i> Connect with me</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('cricketerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const cricketerName = document.getElementById('cricketerName').value;
+            const countryName = document.getElementById('countryName').value;
+
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ cricketerName, countryName }),
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('responseMessage').innerText = data;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

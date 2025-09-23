@@ -1,0 +1,10 @@
+version: '3.8'
+services: 
+  movies:
+    image: movies:v1
+    ports:
+      - "91:80"
+  tv_shows:
+    build: .
+    ports:
+      - "92:80"
