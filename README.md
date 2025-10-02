@@ -30,4 +30,31 @@ create table cricketers(
     name varchar(255) not null,
     country varchar(255) not null
 )
+```
+# to run application without using docker-compose
+Step 1: Create a Docker Network
+```
+docker network create app-network
+```
+Step 2: Run MySQL Container
+```
+docker run -d --name db --network app-network \
+  -e MYSQL_ROOT_PASSWORD=kastro \
+  -e MYSQL_DATABASE=cricket_db \
+  -v db_data:/var/lib/mysql \
+  mysql:5.7
+```
+Step 3: Build Your Application Image
+```
+docker build -t my-app .
+```
+Step 4: Run Your Application Container
+```
+docker run -d --name app --network app-network \
+  -p 3000:3000 \
+  -e DB_HOST=db \
+  -e DB_USER=root \
+  -e DB_PASS=kastro \
+  my-app
+```
 
