@@ -43,6 +43,17 @@ docker run -d --name db --network app-network \
   -e MYSQL_DATABASE=cricket_db \
   -v db_data:/var/lib/mysql \
   mysql:5.7
+
+            OR ✅ With Persistent Storage (Recommended):
+# Create a named volume
+docker volume create mysql_data
+
+# Run container with volume
+docker run --name db \
+  -e MYSQL_ROOT_PASSWORD=kastro \
+  -e MYSQL_DATABASE=cricket_db \
+  -v mysql_data:/var/lib/mysql \
+  -d mysql:5.7
 ```
 Step 3: Build Your Application Image
 ```
