@@ -120,13 +120,17 @@ kubectl port-forward service/app-service 8080:80 &
 
 # debugging 
 
-# Restart the app deployment to pick up the change
+## Restart the app deployment to pick up the change
+```
 kubectl rollout restart deployment app
+```
 
-# Check application logs - should show successful connection
+## Check application logs - should show successful connection
+```
 kubectl logs -l app=my-app
+```
 
-# application code has:
+## application code has:
 ```
 const db = mysql.createConnection({
     host: 'db',          // ← Expects service named 'db'
