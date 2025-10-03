@@ -69,3 +69,11 @@ docker run -d --name app --network app-network \
   my-app
 ```
 
+------------------------------------------
+
+# Task of the day is to add deployment, service and ingress resources.
+
+# Configure RDS for database.
+
+# Convert the menifests to helm charts.
+
