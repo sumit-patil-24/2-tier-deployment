@@ -71,6 +71,41 @@ docker run -d --name app --network app-network \
 
 ------------------------------------------
 
+cd k8s-manifest/
+
+# Apply in correct order
+```
+kubectl apply -f mysql-pvc.yaml
+kubectl apply -f mysql-deployment.yaml
+kubectl apply -f app-deployment.yaml
+```
+
+# Wait for Pods to be Ready
+```
+kubectl wait --for=condition=ready pod -l app=mysql --timeout=300s
+```
+
+#  Initialize Database
+```
+# Create the cricketers table
+kubectl exec -it $(kubectl get pod -l app=mysql -o name) -- mysql -u root -pkastro cricket_db -e "
+CREATE TABLE IF NOT EXISTS cricketers(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    country VARCHAR(255) NOT NULL
+);"
+
+# Verify table creation
+kubectl exec -it $(kubectl get pod -l app=mysql -o name) -- mysql -u root -pkastro cricket_db -e "SHOW TABLES;"
+```
+
+# Access Your Application
+```
+kubectl port-forward service/app-service 8080:80 &
+```
+
+
+
 # Task of the day is to add deployment, service and ingress resources.
 
 # Configure RDS for database.
