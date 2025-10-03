@@ -32,11 +32,12 @@ create table cricketers(
 )
 ```
 # to run application without using docker-compose
-Step 1: Create a Docker Network
+## Step 1: Create a Docker Network
 ```
 docker network create app-network
 ```
-Step 2: Run MySQL Container
+
+## Step 2: Run MySQL Container
 ```
 docker run -d --name db --network app-network \
   -e MYSQL_ROOT_PASSWORD=kastro \
@@ -55,11 +56,14 @@ docker run --name db \
   -v mysql_data:/var/lib/mysql \
   -d mysql:5.7
 ```
-Step 3: Build Your Application Image
+
+## Step 3: Build Your Application Image
 ```
 docker build -t my-app .
 ```
-Step 4: Run Your Application Container
+
+## Step 4: Run Your Application Container
+
 ```
 docker run -d --name app --network app-network \
   -p 3000:3000 \
@@ -73,7 +77,7 @@ docker run -d --name app --network app-network \
 
 cd k8s-manifest/
 
-# Apply in correct order
+## Apply in correct order
 ```
 kubectl apply -f mysql-pvc.yaml
 kubectl apply -f mysql-deployment.yaml
@@ -84,12 +88,12 @@ or
 kubectl apply -k .
 ```
 
-# Wait for Pods to be Ready
+## Wait for Pods to be Ready
 ```
 kubectl wait --for=condition=ready pod -l app=mysql --timeout=300s
 ```
 
-#  Initialize Database
+##  Initialize Database
 ```
 # Create the cricketers table
 kubectl exec -it $(kubectl get pod -l app=mysql -o name) -- mysql -u root -pkastro cricket_db -e "
@@ -103,18 +107,18 @@ CREATE TABLE IF NOT EXISTS cricketers(
 kubectl exec -it $(kubectl get pod -l app=mysql -o name) -- mysql -u root -pkastro cricket_db -e "SHOW TABLES;"
 ```
 
-# Access Your Application
+## Access Your Application
 ```
 kubectl port-forward service/app-service 8080:80 &
 ```
 
 
 
-# Task of the day is to add deployment, service and ingress resources.
+## Task of the day is to add deployment, service and ingress resources.
 
-# Configure RDS for database.
+## Configure RDS for database.
 
-# Convert the menifests to helm charts.
+## Convert the menifests to helm charts.
 
 
 
