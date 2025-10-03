@@ -113,15 +113,6 @@ kubectl port-forward service/app-service 8080:80 &
 ```
 
 
-
-## Task of the day is to add deployment, service and ingress resources.
-
-## Configure RDS for database.
-
-## Convert the menifests to helm charts.
-
-
-
 # debugging 
 
 ## Restart the app deployment to pick up the change
@@ -142,4 +133,16 @@ const db = mysql.createConnection({
     database: 'cricket_db'
 });
 ```
+
+# future improvements
+ add ingress resources.
+ Configure RDS for database.
+ Convert the menifests to helm charts.
+ use secrets istead of hardcoded values.
+ github worklows
+ argocd
+ prometheus and grafana
+ slack notification
+
+
 
