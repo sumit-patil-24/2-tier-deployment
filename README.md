@@ -79,6 +79,10 @@ kubectl apply -f mysql-pvc.yaml
 kubectl apply -f mysql-deployment.yaml
 kubectl apply -f app-deployment.yaml
 ```
+or 
+```
+kubectl apply -k .
+```
 
 # Wait for Pods to be Ready
 ```
@@ -111,4 +115,23 @@ kubectl port-forward service/app-service 8080:80 &
 # Configure RDS for database.
 
 # Convert the menifests to helm charts.
+
+
+
+# debugging 
+
+# Restart the app deployment to pick up the change
+kubectl rollout restart deployment app
+
+# Check application logs - should show successful connection
+kubectl logs -l app=my-app
+
+# application code has:
+```
+const db = mysql.createConnection({
+    host: 'db',          // ← Expects service named 'db'
+    password: 'kastro',   // ← Hardcoded password
+    database: 'cricket_db'
+});
+```
 
