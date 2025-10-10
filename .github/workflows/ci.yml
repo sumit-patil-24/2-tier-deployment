@@ -6,25 +6,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      # The service name 'db' is used as the hostname (DB_HOST)
-      db:
-        image: mysql:8.0 # Use a stable MySQL version
-        env:
-          # These variables configure the Docker MySQL image on startup
-          MYSQL_ROOT_PASSWORD: kastro
-          MYSQL_USER: root
-          MYSQL_PASSWORD: kastro
-          MYSQL_DATABASE: cricket_db 
-
-    # 🟢 CRITICAL ADDITION: Wait for the database to be healthy
-        options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -u root -pkastro" 
-          --health-interval=10s 
-          --health-timeout=5s 
-          --health-retries=3
-
-
     steps:
     - name: checkout code
       uses: actions/checkout@v4
@@ -37,11 +18,25 @@ jobs:
     - name: build application
       run: npm install 
 
-    - name: run application
-      env:
-        # Application execution also needs the DB environment variables
-         DB_HOST: db
-         DB_USER: root
-         DB_PASS: kastro
-      run: node app.js
+    # application needs sql to run
+  #  - name: run application
+  #    run: node app.js
 
+  docker:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps: 
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: install docker 
+        uses: docker/setup-buildx-action@v1
+
+      - name: login to docker
+        uses: docker/login-action@v3
+        with:
+        username: ${{secrets.DOCKER_USERNAME}}
+        password: ${{secrets.DOCKER_TOKEN}}
+
+      
