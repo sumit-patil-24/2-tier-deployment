@@ -1,0 +1,11 @@
+name: cricket application
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout code
+    uses: action/checkout@v4
