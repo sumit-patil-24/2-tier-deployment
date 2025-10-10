@@ -17,6 +17,14 @@ jobs:
           MYSQL_PASSWORD: kastro
           MYSQL_DATABASE: cricket_db 
 
+    # 🟢 CRITICAL ADDITION: Wait for the database to be healthy
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -u root -pkastro" 
+          --health-interval=10s 
+          --health-timeout=5s 
+          --health-retries=3
+
+
     steps:
     - name: checkout code
       uses: actions/checkout@v4
