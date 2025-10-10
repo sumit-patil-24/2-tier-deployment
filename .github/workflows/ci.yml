@@ -44,5 +44,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{secrets.DOCKER_USERNAME}}/2-tier-app:{{github.run_id}}
+          tags: ${{secrets.DOCKER_USERNAME}}/2-tier-app:${{github.run_id}}
       
