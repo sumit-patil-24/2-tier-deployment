@@ -17,3 +17,6 @@ jobs:
 
     - name: build application
       run: npm install 
+
+    - name: run application
+      run: node app.js
