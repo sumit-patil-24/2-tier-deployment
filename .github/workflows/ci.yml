@@ -15,5 +15,3 @@ jobs:
         with:
           node-version: '20'
 
-    - name: build application
-      run: npm install 
