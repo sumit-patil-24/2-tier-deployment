@@ -6,9 +6,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      # The service name 'db' is used as the hostname (DB_HOST)
+      db:
+        image: mysql:8.0 # Use a stable MySQL version
+        env:
+          # These variables configure the Docker MySQL image on startup
+          MYSQL_ROOT_PASSWORD: kastro
+          MYSQL_USER: root
+          MYSQL_PASSWORD: kastro
+          MYSQL_DATABASE: cricket_db 
+
     steps:
     - name: checkout code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v4
 
     - name: setup node
       uses: actions/setup-node@v4
@@ -19,4 +30,10 @@ jobs:
       run: npm install 
 
     - name: run application
+      env:
+        # Application execution also needs the DB environment variables
+         DB_HOST: db
+         DB_USER: root
+         DB_PASS: kastro
       run: node app.js
+
