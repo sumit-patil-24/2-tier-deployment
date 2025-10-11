@@ -26,7 +26,7 @@ show tables;
 
 ## Create the table:
 create table cricketers(
-    id auto_increment primary key,
+    id int auto_increment primary key,
     name varchar(255) not null,
     country varchar(255) not null
 )
