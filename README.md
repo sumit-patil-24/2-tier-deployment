@@ -29,7 +29,7 @@ create table cricketers(
     id int auto_increment primary key,
     name varchar(255) not null,
     country varchar(255) not null
-)
+);
 ```
 # to run application without using docker-compose
 ## Step 1: Create a Docker Network
