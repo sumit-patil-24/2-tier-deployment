@@ -1,0 +1,29 @@
+app:
+  replicaCount: 1
+  image:
+    repository: sumit202/2-tier-app
+    tag: v1
+  service:
+    # This is the value you wanted to parameterize.
+    # Users can override this to ClusterIP or LoadBalancer if needed.
+    type: NodePort 
+    port: 80
+    targetPort: 3000
+
+# --- MySQL Database Configuration ---
+mysql:
+  enabled: true
+  image:
+    repository: mysql
+    tag: "5.7"
+  # NOTE: Using plain text passwords is not recommended for production.
+  # Best practice is to use Kubernetes Secrets!
+  rootPassword: "kastro" 
+  databaseName: "cricket_db"
+  service:
+    port: 3306 # The port MySQL listens on
+
+  persistence:
+    enabled: true
+    size: 1Gi # Storage size for the PVC
+    storageClassName: "" # Leave empty to use the cluster's default StorageClass
