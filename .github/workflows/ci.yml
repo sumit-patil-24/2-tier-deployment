@@ -1,6 +1,13 @@
 name: cricket application
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'helm/**'
+      - 'k8s/**'
+      - 'README.md'
 
 jobs:
   build:
