@@ -13,11 +13,12 @@ spec:
     spec:
       containers:
       - name: app
-        image: sumit202/2-tier-app:v1
+        image: sumit202/2-tier-app:{{ .Values.image.tag }}
         ports:
         - containerPort: 3000
-        # No environment variables needed since they're hardcoded
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
