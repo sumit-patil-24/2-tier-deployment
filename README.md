@@ -26,17 +26,18 @@ show tables;
 
 ## Create the table:
 create table cricketers(
-    id auto_increment primary key,
+    id int auto_increment primary key,
     name varchar(255) not null,
     country varchar(255) not null
-)
+);
 ```
 # to run application without using docker-compose
-Step 1: Create a Docker Network
+## Step 1: Create a Docker Network
 ```
 docker network create app-network
 ```
-Step 2: Run MySQL Container
+
+## Step 2: Run MySQL Container
 ```
 docker run -d --name db --network app-network \
   -e MYSQL_ROOT_PASSWORD=kastro \
@@ -55,11 +56,14 @@ docker run --name db \
   -v mysql_data:/var/lib/mysql \
   -d mysql:5.7
 ```
-Step 3: Build Your Application Image
+
+## Step 3: Build Your Application Image
 ```
 docker build -t my-app .
 ```
-Step 4: Run Your Application Container
+
+## Step 4: Run Your Application Container
+
 ```
 docker run -d --name app --network app-network \
   -p 3000:3000 \
@@ -68,4 +72,77 @@ docker run -d --name app --network app-network \
   -e DB_PASS=kastro \
   my-app
 ```
+
+------------------------------------------
+
+cd k8s-manifest/
+
+## Apply in correct order
+```
+kubectl apply -f mysql-pvc.yaml
+kubectl apply -f mysql-deployment.yaml
+kubectl apply -f app-deployment.yaml
+```
+or 
+```
+kubectl apply -k .
+```
+
+## Wait for Pods to be Ready
+```
+kubectl wait --for=condition=ready pod -l app=mysql --timeout=300s
+```
+
+##  Initialize Database
+```
+# Create the cricketers table
+kubectl exec -it $(kubectl get pod -l app=mysql -o name) -- mysql -u root -pkastro cricket_db -e "
+CREATE TABLE IF NOT EXISTS cricketers(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    country VARCHAR(255) NOT NULL
+);"
+
+# Verify table creation
+kubectl exec -it $(kubectl get pod -l app=mysql -o name) -- mysql -u root -pkastro cricket_db -e "SHOW TABLES;"
+```
+
+## Access Your Application
+```
+kubectl port-forward service/app-service 8080:80 &
+```
+
+
+# debugging 
+
+## Restart the app deployment to pick up the change
+```
+kubectl rollout restart deployment app
+```
+
+## Check application logs - should show successful connection
+```
+kubectl logs -l app=my-app
+```
+
+## application code has:
+```
+const db = mysql.createConnection({
+    host: 'db',          // ← Expects service named 'db'
+    password: 'kastro',   // ← Hardcoded password
+    database: 'cricket_db'
+});
+```
+
+# future improvements
+ add ingress resources.
+ Configure RDS for database.
+ Convert the menifests to helm charts.
+ use secrets istead of hardcoded values.
+ github worklows
+ argocd
+ prometheus and grafana
+ slack notification
+
+
 
