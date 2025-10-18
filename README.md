@@ -1,7 +1,7 @@
 # 🚀 Deployment of 2 tier Application 
 
 ##  Overview
-This is End to End project to deploy 2 tier application using Github Actions as CI and ArgoCD for CD.
+This is End to End project to deploy 2 tier application using Github Actions as CI and ArgoCD for CD, where any commit on Application triggres CI pipeline which first build and pushes the application and updates the image tag on helm charts.
 
 ## Pipeline workflow
 1. checkout code from GitHub.  
@@ -10,6 +10,14 @@ This is End to End project to deploy 2 tier application using Github Actions as 
 4. Argo CD pick ups the changes and Deployes Application.  
 ---
 
+
+## Step-by-Step guide to deploy application
+1. Create t2.medium EC2 instance
+2. Install Docker
+3. Install Kubectl and Minikube
+4. Install Argo CD
+5. Clone repository
+6. Configure Argo CD to point helm chart
 
 
 ## 🪜 Setup & Screenshots
