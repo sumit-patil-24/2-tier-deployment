@@ -1,13 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  # Best practice: Name the resource based on the Helm release name
-  name: {{ .Release.Name }}-app-deployment
-  labels:
-    app: my-app
+  name: app
 spec:
-  # Parameterize the replica count
-  replicas: {{ .Values.app.replicaCount }}
   selector:
     matchLabels:
       app: my-app
@@ -18,25 +13,20 @@ spec:
     spec:
       containers:
       - name: app
-        # Parameterize the image repository and tag
-        image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag }}"
+        image: sumit202/2-tier-app:{{ .Values.image.tag }}
         ports:
-        - containerPort: {{ .Values.app.service.targetPort }}
-        
-        # --- NEW ENVIRONMENT VARIABLES FOR DB CONNECTION ---
-        env:
-        - name: DB_HOST
-          # The MySQL Service is named 'db', which is resolvable within the cluster
-          value: "db" 
-        - name: DB_PORT
-          # Use the port defined in values.yaml
-          value: {{ .Values.mysql.service.port | quote }}
-        - name: DB_USER
-          # Standard MySQL user for the application is root
-          value: "root" 
-        - name: DB_PASSWORD
-          # Use the password defined in values.yaml (or eventually a Secret)
-          value: {{ .Values.mysql.rootPassword | quote }}
-        - name: DB_NAME
-          # Use the database name defined in values.yaml
-          value: {{ .Values.mysql.databaseName | quote }}
+        - containerPort: 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  selector:
+    app: my-app
+  ports:
+  - port: 80
+    targetPort: 3000
+  type: NodePort
