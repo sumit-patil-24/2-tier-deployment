@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: sumit202/2-tier-app:{{ .Values.image.tag }}
+        image: sumit202/2-tier-app:v1
         ports:
         - containerPort: 3000
 
