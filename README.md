@@ -42,3 +42,7 @@ we need to create table to insert data from application.
 steps:-
   - kubectl exec -it <mysql-pod-name> -- /bin/bash
   - mysql -u root -p
+
+### Future Work:
+1. Setup monitoring
+2. Deploy using EKS Cluster
