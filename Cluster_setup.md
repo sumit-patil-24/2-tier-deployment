@@ -56,6 +56,6 @@
     --set serviceAccount.create=false \
     --set serviceAccount.name=aws-load-balancer-controller \
     --set region=ap-south-1 \
-    --set vpcId=vpc-0b154a80b7424ef11
+    --set vpcId=<your-vpc-id>
 
 After completing these steps,ALB controller will be configured and able to manage load balancers within the EKS cluster.
