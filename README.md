@@ -37,6 +37,9 @@ This is End to End project to deploy 2 tier application using Github Actions as 
 ### 5️⃣ Docker image getting pushed to dockerhub
 <img width="922" height="788" alt="Screenshot 2025-10-18 101242" src="https://github.com/user-attachments/assets/62151bb8-2fab-44d3-b101-a90699ea9703" />
 
+### 6️⃣ Grafana to watch node status(cpu utilization, memory utilization, disk utilization)
+<img width="1919" height="965" alt="Screenshot 2025-11-13 182152" src="https://github.com/user-attachments/assets/6481e419-21b0-4021-b1b3-38b2a19e34be" />
+
 ### Note:-
 we need to create table to insert data from application.
 steps:-
@@ -44,5 +47,4 @@ steps:-
   - mysql -u root -p
 
 ### Future Work:
-1. Setup monitoring
-2. Deploy using EKS Cluster
+1. Deploy using EKS Cluster
