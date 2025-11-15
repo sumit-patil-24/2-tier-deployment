@@ -16,8 +16,11 @@ This is End to End project to deploy 2 tier application using Github Actions as 
 2. Setup EKS Cluster
   - https://github.com/sumit-patil-24/2-tier-deployment/blob/a5c1684cca989b852a0db65f94c99ff4507ff805/Cluster_setup.md
 3. Install helm
+  ``` 
+  sudo snap install helm --classic
+  ```
 4. Install Argo CD using helm
-
+  - https://github.com/sumit-patil-24/2-tier-deployment/blob/7a1af37fa07b979fe98f3da25a62342584d54dc6/Install_ArgoCD.md
 5. Deploy application using loadbalancer service type
 6. Install monitoring stack using helm
 
