@@ -1,10 +1,10 @@
-### 🧰 Step 2: Install kube-prometheus-stack
+### 🧰 Step 1: Install kube-prometheus-stack
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 ```
 
-### 🚀 Step 3: Deploy the chart into a new namespace "monitoring"
+### 🚀 Step 2: Deploy the chart into a new namespace "monitoring"
 ```bash
 kubectl create ns monitoring
 ```
@@ -16,7 +16,7 @@ helm install monitoring prometheus-community/kube-prometheus-stack \
 -f ./custom_kube_prometheus_stack.yml
 ```
 
-### ✅ Step 4: Verify the Installation
+### ✅ Step 3: Verify the Installation
 ```bash
 kubectl get all -n monitoring
 ```
@@ -36,7 +36,7 @@ kubectl port-forward service/monitoring-grafana -n monitoring 8080:80
 kubectl port-forward service/alertmanager-operated -n monitoring 9093:9093
 ```
 
-### 🧼 Step 5: Clean UP
+### 🧼 Step 4: Clean UP
 - **Uninstall helm chart**:
 ```bash
 helm uninstall monitoring --namespace monitoring
