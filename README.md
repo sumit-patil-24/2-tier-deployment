@@ -13,18 +13,24 @@ This is End to End project to deploy 2 tier application using Github Actions as 
 
 ## Step-by-Step guide to deploy application
 1. **Install prerequisites(kubectl, aws cli, eksctl, configure aws cli)**
+
 2. **Setup EKS Cluster**
   - https://github.com/sumit-patil-24/2-tier-deployment/blob/a5c1684cca989b852a0db65f94c99ff4507ff805/Cluster_setup.md
+
 3. **Install helm**
    ```bash
    sudo snap install helm --classic
    ```
+
 4. **Install Argo CD using helm**
   - https://github.com/sumit-patil-24/2-tier-deployment/blob/7a1af37fa07b979fe98f3da25a62342584d54dc6/Install_ArgoCD.md
+
 5. **Deploy application using loadbalancer service type**
+
 6. **Install monitoring stack using helm**
 - https://github.com/sumit-patil-24/2-tier-deployment/blob/11b4e8d5c2a07c1dc7892a74638e25e71b21cad5/monitoring-setup.md
 
+---
 
 ## 🪜 Setup & Screenshots
 
