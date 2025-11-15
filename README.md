@@ -52,6 +52,9 @@ This is End to End project to deploy 2 tier application using Github Actions as 
 ### 6️⃣ Grafana to watch node status(cpu utilization, memory utilization, disk utilization)
 <img width="1919" height="965" alt="Screenshot 2025-11-13 182152" src="https://github.com/user-attachments/assets/6481e419-21b0-4021-b1b3-38b2a19e34be" />
 
+
+---
+
 ### Note:-
 we need to create table to insert data from application.
 steps:-
