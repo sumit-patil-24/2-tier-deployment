@@ -1,4 +1,5 @@
 # 🚀 Deployment of 2 tier Application 
+https://github.com/sumit-patil-24/2-tier-deployment/blob/5b4ca2e04ec2c7f63b8573b85f4f3bf79df42e4b/monitoring-setup.md
 
 ##  Overview
 This is End to End project to deploy 2 tier application using Github Actions as CI and ArgoCD for CD, where any commit on Application triggres CI pipeline which first build and pushes the application and updates the image tag on helm charts.
