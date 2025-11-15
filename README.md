@@ -23,6 +23,7 @@ This is End to End project to deploy 2 tier application using Github Actions as 
   - https://github.com/sumit-patil-24/2-tier-deployment/blob/7a1af37fa07b979fe98f3da25a62342584d54dc6/Install_ArgoCD.md
 5. Deploy application using loadbalancer service type
 6. Install monitoring stack using helm
+- https://github.com/sumit-patil-24/2-tier-deployment/blob/11b4e8d5c2a07c1dc7892a74638e25e71b21cad5/monitoring-setup.md
 
 
 ## 🪜 Setup & Screenshots
