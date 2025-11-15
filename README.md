@@ -12,12 +12,14 @@ This is End to End project to deploy 2 tier application using Github Actions as 
 
 
 ## Step-by-Step guide to deploy application
-1. Create t2.medium EC2 instance
-2. Install Docker
-3. Install Kubectl and Minikube
-4. Install Argo CD
-5. Clone repository
-6. Configure Argo CD to point helm chart
+1. Install prerequisites(kubectl, aws cli, eksctl, configure aws cli)
+2. Setup EKS Cluster
+  - https://github.com/sumit-patil-24/2-tier-deployment/blob/a5c1684cca989b852a0db65f94c99ff4507ff805/Cluster_setup.md
+3. Install helm
+4. Install Argo CD using helm
+
+5. Deploy application using loadbalancer service type
+6. Install monitoring stack using helm
 
 
 ## 🪜 Setup & Screenshots
